@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { AddNewTaskPage } from '../add-new-task/add-new-task.page';
 
 @Component({
@@ -9,56 +9,42 @@ import { AddNewTaskPage } from '../add-new-task/add-new-task.page';
 })
 export class HomePage {
 
-  todoList = [{
-    itemName: 'Coding',
-    itemDueDate: '12-10-21',
-    itemPriority: 'low',
-    itemCategory: 'Work'
-  },
-  {
-    itemName: 'Video Edit',
-    itemDueDate: '12-01-21',
-    itemPriority: 'high',
-    itemCategory: 'Work'
-  },
-  {
-    itemName: 'Design Logo',
-    itemDueDate: '12-10-21',
-    itemPriority: 'medium',
-    itemCategory: 'Work'
-  },
-  {
-    itemName: 'Audio Recording',
-    itemDueDate: '12-16-21',
-    itemPriority: 'medium',
-    itemCategory: 'Work'
-  },
-  {
-    itemName: 'Audio Edit',
-    itemDueDate: '12-10-21',
-    itemPriority: 'high',
-    itemCategory: 'Work'
-  },
-  {
-    itemName: 'Date with babe',
-    itemDueDate: '12-10-21',
-    itemPriority: 'high',
-    itemCategory: 'Personal'
-  },
-]
+  todoList = []
 
  today: number = Date.now();
 
   constructor(
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public alert: ToastController
   ) {}
 
+
+  async presentToast(message, color){
+    const toast = await this.alert.create({
+      message: message,
+      duration: 2000,
+      color: color
+    });
+    toast.present();
+  }
+
+  //add task function
   async addTask(){
     const modal = await this.modalCtrl.create({
       component: AddNewTaskPage
     });
-
+// get data from modal right after modal closes..
+    modal.onDidDismiss().then(newTaskObj => {
+      console.log(newTaskObj.data);
+      this.todoList.push(newTaskObj.data);
+        this.presentToast('Task added to list','success');
+    })
     return await modal.present();
   }
 
+  //delete task from list
+  deleteTask(index){
+    this.todoList.splice(index,1);
+    this.presentToast('Task deleted from list', 'danger');
+  }
 }

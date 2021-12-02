@@ -13,6 +13,7 @@
     </ion-item>
 
     <ion-item>
+      <ion-icon name="warning-outline" slot="start" size="small" ></ion-icon>
       <ion-label>Priority</ion-label>
       <ion-select [(ngModel)]="taskPriority">
         <ion-select-option value="Low">Low</ion-select-option>
@@ -22,7 +23,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      <ion-icon name="calendar-outline" size="small" slot="start"></ion-icon>
       <ion-label>Due Date</ion-label>
       <ion-datetime [(ngModel)]="taskDate" displayFormat="D MMM YYYY H:mm" ></ion-datetime>
     </ion-item>
