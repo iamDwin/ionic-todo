@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
-import { StorageService } from '../storage.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-add-new-task',
@@ -32,7 +32,7 @@ export class AddNewTaskPage implements OnInit {
       duration: 2000,
       color: color,
       animated: true,
-      position: 'top'
+      position: 'bottom'
     });
     toast.present();
   }

@@ -2,7 +2,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { AddNewTaskPage } from '../add-new-task/add-new-task.page';
-import { StorageService } from '../storage.service';
+import { StorageService } from '../services/storage.service';
 import { UpdateTaskPage } from '../update-task/update-task.page';
 
 @Component({
@@ -30,7 +30,7 @@ export class HomePage {
       duration: 2000,
       color: color,
       animated: true,
-      position: 'top'
+      position: 'bottom'
     });
     toast.present();
   }
@@ -41,23 +41,25 @@ export class HomePage {
       component: AddNewTaskPage
     });
 
-// get data from modal right after modal closes..
+  // get data from modal right after modal closes..
     modal.onDidDismiss().then(newTaskObj => {
       this.init();
     })
     return await modal.present();
   }
 
-//update task modal popup...
-  async updateTask(key){
+  //update task modal popup...
+  async updateTask(selectedTask){
     const modal = await this.modalCtrl.create({
-      component: UpdateTaskPage
+      component: UpdateTaskPage,
+      componentProps: {task: selectedTask}
     });
-//after the modal closes..
+
+    //after the modal closes..
     modal.onDidDismiss().then(updatedTaskObj => {
       this.init(); //reload allTasks..
     });
-
+ 
     return await modal.present();
   }
 

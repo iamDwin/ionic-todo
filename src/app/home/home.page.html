@@ -1,17 +1,17 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-item lines="none">
+  <ion-toolbar color="primary">
+    <ion-item color="primary" lines="none">
       <ion-label style="font-weight: 600; font-size: 2em;"> 
         Today
       </ion-label>
-      <p style="font-weight: 400; color: #433465;"> 
+      <p style="font-weight: 400;"> 
         {{today | date:'fullDate'}}
       </p>
     </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
 
   <ion-card *ngFor="let item of todoList; let i = index" >
 
@@ -33,7 +33,7 @@
     </ion-card-content>
 
     <ion-row>
-      <ion-item button (click)="updateTask(item.key);" >
+      <ion-item button (click)="updateTask(item);" >
         <ion-icon size="small" name="pencil"></ion-icon>
         <p> Edit</p>
       </ion-item>

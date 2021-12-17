@@ -12,16 +12,22 @@ export class StorageService {
     this.init();
   }
 
+  // add task service...
   addTask(key, value ){
     this.store.set(key,value);
   }
 
+  // delete task service...
   deleteTask(key){
      this.store.remove(key);
   }
 
-  updateTask(){}
+  // update task service...
+  updateTask(key,value){
+    this.store.set(key,value);
+  }
 
+  //load all tasks from memory service...
   getAllTask(){
     let task: any = [];
     this.store.forEach((value, key, index) => {
