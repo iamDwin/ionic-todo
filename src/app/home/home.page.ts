@@ -59,7 +59,7 @@ export class HomePage {
     modal.onDidDismiss().then(updatedTaskObj => {
       this.init(); //reload allTasks..
     });
- 
+
     return await modal.present();
   }
 
@@ -73,5 +73,6 @@ export class HomePage {
   //get all tasks from storage..
   init(){
     this.todoList = this.store.getAllTask();
+    console.log(this.todoList);
   }
 }

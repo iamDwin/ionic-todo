@@ -22,6 +22,9 @@ export class StorageService {
      this.store.remove(key);
   }
 
+  all(){
+    this.store.keys();
+  }
   // update task service...
   updateTask(key,value){
     this.store.set(key,value);
